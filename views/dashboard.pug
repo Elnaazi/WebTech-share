@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Dashboard
+    link(rel="stylesheet", href="/CSS/Stylesheet.css")
+  body
+    div.navbar
+      nav
+        ul
+          li
+            a(href="/") Weathertop
+          li
+            a(href="/dashboard") Dashboard
+    
+    div.dashboard
+      h1 Dashboard
+
+    // Iterate over the weatherData array
+    each station in weatherData
+      div.outer-container 
+        ul
+          p #{station.city} 
+          div.inner-container
+            ul
+              p 
+                span.title Weather
+                span.value #{station.weather}
+
+          div.inner-container
+            ul
+              p 
+                span.title Temperatur 
+                span.value #{station.temperatur} Grad
+
+          div.inner-container
+            ul
+                p 
+                  span.title Wind 
+                  span.value #{station.wind} bft
+          div.inner-container
+            ul
+              p 
+                span.title Luftdruck 
+                span.value #{station.luftdruck} hpa
+        a(href=`/station/${station.id}`) Details

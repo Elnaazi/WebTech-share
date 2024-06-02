@@ -1,0 +1,140 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Weathertop
+    link(rel="stylesheet", href="/CSS/Stylesheet.css")
+  body
+    div.navbar
+      nav
+        ul
+          li
+            a(href="/") Weathertop
+          li
+            a(href="/dashboard") Dashboard
+
+
+
+    case stationId
+      when '1'
+        div.outer-container 
+          ul
+            p Regensburg  
+            div.inner-container
+              ul
+                p 
+                  span.title Weather
+                  span.value 800
+            div.inner-container
+              ul
+                p 
+                  span.title Temperatur 
+                  span.value 20.32 Grad
+            div.inner-container
+              ul
+                  p 
+                    span.title Wind 
+                    span.value 0.89 bft
+            div.inner-container
+              ul
+                p 
+                  span.title Luftdruck 
+                  span.value 1016 hpa
+
+
+                  
+        div.table-container
+
+          table
+            tr
+              th Wetter
+              th Temperatur
+              th Wind
+              th Luft Druck
+            
+            tr
+              td 800
+              td 20.32
+              td 0.89
+              td 1016
+            
+            tr
+              td 800
+              td 20.32
+              td 0.89
+              td 1016
+
+            tr
+              td 400
+              td 32.5
+              td 15
+              td 90
+            
+            tr
+              td 400
+              td 32.5
+              td 15
+              td 90
+
+            tr
+              td 800
+              td 11.16
+              td 2.23 
+              td 1024
+
+
+          
+
+      when '2'
+        div.outer-container 
+          ul
+            p Kelheim 
+            div.inner-container
+              ul
+                p 
+                  span.title Weather
+                  span.value 600
+            div.inner-container
+              ul
+                p 
+                  span.title Temperatur 
+                  span.value 0.25 Grad
+            div.inner-container
+              ul
+                  p 
+                    span.title Wind 
+                    span.value 1.02 bft
+            div.inner-container
+              ul
+                p 
+                  span.title Luftdruck 
+                  span.value 1002 hpa
+
+      when '3'
+        div.outer-container 
+          ul
+            p Meunchen 
+            div.inner-container
+              ul
+                p 
+                  span.title Weather
+                  span.value 500
+            div.inner-container
+              ul
+                p 
+                  span.title Temperatur 
+                  span.value 17.67 Grad
+            div.inner-container
+              ul
+                  p 
+                    span.title Wind 
+                    span.value 0.89 bft
+            div.inner-container
+              ul
+                p 
+                  span.title Luftdruck 
+                  span.value 1017 hpa
+
+      default
+        p Invalid station ID.

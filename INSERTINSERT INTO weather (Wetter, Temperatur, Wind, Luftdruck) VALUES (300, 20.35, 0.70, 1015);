@@ -1,0 +1,12 @@
++------------+------------------+-------------------------------------------------------+
+| [38;5;47;01mColumn[39;00m     | [38;5;47;01mType[39;00m             | [38;5;47;01mModifiers[39;00m                                             |
+|------------+------------------+-------------------------------------------------------|
+| id         | integer          |  not null default nextval('weather_id_seq'::regclass) |
+| wetter     | integer          |  not null                                             |
+| temperatur | double precision |  not null                                             |
+| wind       | double precision |  not null                                             |
+| luftdruck  | double precision |  not null                                             |
++------------+------------------+-------------------------------------------------------+
+Indexes:
+    "weather_pkey" PRIMARY KEY, btree (id)
+
