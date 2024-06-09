@@ -6,7 +6,7 @@ html(lang="en")
     title Dashboard
     link(rel="stylesheet", href="/CSS/Stylesheet.css")
   body
-    div.navbar
+    .navbar
       nav
         ul
           li
@@ -14,34 +14,70 @@ html(lang="en")
           li
             a(href="/dashboard") Dashboard
     
-    div.dashboard
+    .dashboard
       h1 Dashboard
 
-    // Iterate over the weatherData array
-    each station in weatherData
-      div.outer-container 
-        ul
-          p #{station.city} 
-          div.inner-container
+    each station in stations
+      .outer-container 
+
+          .inner-container
+
+            ul
+              p
+                span=station.location
+                span Lat:
+                span=station.breitengrad
+                span Lon;
+                span=station.längengrad
+          .inner-container
             ul
               p 
                 span.title Weather
-                span.value #{station.weather}
-
-          div.inner-container
+                span=station.wetter 
+          .inner-container
             ul
               p 
                 span.title Temperatur 
-                span.value #{station.temperatur} Grad
-
-          div.inner-container
+                span=station.temperatur 
+          .inner-container
             ul
                 p 
                   span.title Wind 
-                  span.value #{station.wind} bft
-          div.inner-container
+                  span=station.wind 
+          .inner-container
             ul
               p 
                 span.title Luftdruck 
-                span.value #{station.luftdruck} hpa
-        a(href=`/station/${station.id}`) Details
+                span=station.luftdruck 
+
+
+      .edit-remove         
+        a.details(href=`/station/${station.station_id}`)
+          svg(xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="details" viewBox="0 0 16 16")
+            path(d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 72 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z")
+    
+
+        form.delete_form(action=`/station/${station.station_id}/delete` method="post")
+          //Button for the form
+          button.btn.btn-link(type="submit")
+              svg(xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="remove-station" viewBox="0 0 16 16")
+                path(d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z")
+                path(d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z")
+
+
+    form(action="/dashboard" method="post")
+      .row
+        .col
+          p
+            span.title Station
+          input.form-control(type="text" name="Station_name" placeholder="Station")
+        .col
+          p
+            span.title Breitengrad
+          input.form-control(type="text" name="Breitengrad_name" placeholder="Breitengrad")
+        .col
+          p
+            span.title Längengrad
+          input.form-control(type="text" name="Längengrad_name" placeholder="Längengrad")
+      button.btn.btn-primary(type="submit") Station hinzufügen
+    
