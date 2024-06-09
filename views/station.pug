@@ -3,7 +3,7 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    title Weathertop
+    title Station Details
     link(rel="stylesheet", href="/CSS/Stylesheet.css")
   body
     div.navbar
@@ -14,127 +14,77 @@ html(lang="en")
           li
             a(href="/dashboard") Dashboard
 
+    .station
+      h1 Station Details
 
-
-    case stationId
-      when '1'
-        div.outer-container 
+      .outer-container
+        .inner-container
           ul
-            p Regensburg  
-            div.inner-container
-              ul
-                p 
-                  span.title Weather
-                  span.value 800
-            div.inner-container
-              ul
-                p 
-                  span.title Temperatur 
-                  span.value 20.32 Grad
-            div.inner-container
-              ul
-                  p 
-                    span.title Wind 
-                    span.value 0.89 bft
-            div.inner-container
-              ul
-                p 
-                  span.title Luftdruck 
-                  span.value 1016 hpa
-
-
-                  
-        div.table-container
-
-          table
-            tr
-              th Wetter
-              th Temperatur
-              th Wind
-              th Luft Druck
-            
-            tr
-              td 800
-              td 20.32
-              td 0.89
-              td 1016
-            
-            tr
-              td 800
-              td 20.32
-              td 0.89
-              td 1016
-
-            tr
-              td 400
-              td 32.5
-              td 15
-              td 90
-            
-            tr
-              td 400
-              td 32.5
-              td 15
-              td 90
-
-            tr
-              td 800
-              td 11.16
-              td 2.23 
-              td 1024
-
-
-          
-
-      when '2'
-        div.outer-container 
+            p
+              span=latestWeather.location
+              span Lat:
+              span=latestWeather.breitengrad
+              span Lon:
+              span=latestWeather.längengrad
+        .inner-container
           ul
-            p Kelheim 
-            div.inner-container
-              ul
-                p 
-                  span.title Weather
-                  span.value 600
-            div.inner-container
-              ul
-                p 
-                  span.title Temperatur 
-                  span.value 0.25 Grad
-            div.inner-container
-              ul
-                  p 
-                    span.title Wind 
-                    span.value 1.02 bft
-            div.inner-container
-              ul
-                p 
-                  span.title Luftdruck 
-                  span.value 1002 hpa
+            p
+              span.title Temperatur
+              span=latestWeather.temperatur
 
-      when '3'
-        div.outer-container 
+        .inner-container
           ul
-            p Meunchen 
-            div.inner-container
-              ul
-                p 
-                  span.title Weather
-                  span.value 500
-            div.inner-container
-              ul
-                p 
-                  span.title Temperatur 
-                  span.value 17.67 Grad
-            div.inner-container
-              ul
-                  p 
-                    span.title Wind 
-                    span.value 0.89 bft
-            div.inner-container
-              ul
-                p 
-                  span.title Luftdruck 
-                  span.value 1017 hpa
+            p
+              span.title Wind
+              span=latestWeather.wind
+        .inner-container
+          ul
+            p
+              span.title Luftdruck
+              span=latestWeather.luftdruck
 
-      default
-        p Invalid station ID.
+    // Form to add new weather data
+    form(action=`/station/${latestWeather.station_id}` method="post")
+      .row
+        .col
+          p
+            span.title Wetter
+          input.form-control(type="text" name="Wetter_value" placeholder="Wetter Code")
+        .col
+          p
+            span.title Temperatur
+          input.form-control(type="text" name="Temperatur_value" placeholder="Temperatur")
+        .col
+          p
+            span.title Windgeschwindigkeit
+          input.form-control(type="text" name="Windgeschwindigkeit_value" placeholder="Windgeschwindigkeit")
+        .col
+          p
+            span.title Luftdruck
+          input.form-control(type="text" name="Luftdruck_value" placeholder="Luftdruck")
+      button.btn.btn-primary(type="submit") Messung hinzufügen
+
+    .table-container
+      table
+        thead
+          th Wetter
+          th Temperatur
+          th Wind
+          th Luftdruck
+          th Zeitpunkt
+        tbody
+          each weather in allWeathers
+            tr
+              td=weather.wetter
+              td=weather.temperatur
+              td=weather.wind
+              td=weather.luftdruck
+              td=weather.zeitpunkt
+              td
+
+                form.delete_form(action=`/station/${latestWeather.station_id}/weather/${weather.weather_id}/delete` method="post")
+                  button.btn.btn-link(type="submit")
+                    svg(xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="remove-station" viewBox="0 0 16 16")
+                      path(d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z")
+                      path(d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z")
+
